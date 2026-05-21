@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>海南布鲁盟装饰空间设计有限公司</title>
+  <meta name="description" content="雪 Design - 专注高端住宅、商业空间、办公环境设计，以国际视野诠释空间美学">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1a1a1a;
+      --secondary: #f5f5f5;
+      --accent: #c9a962;
+      --accent-dark: #a88a4a;
+      --neutral: #666666;
+      --bg: #ffffff;
+      --dark-bg: #0d0d0d;
+      --text-light: rgba(255,255,255,0.9);
+      --text-muted: rgba(255,255,255,0.6);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', 'Noto Serif SC', sans-serif;
+      color: var(--primary);
+      background: var(--bg);
+      overflow-x: hidden;
+      line-height: 1.8;
+    }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', 'Noto Serif SC', serif; font-weight: 600; }
+    a { text-decoration: none; color: inherit; transition: 0.3s; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 50px; }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    .section-title {
+      font-size: clamp(36px, 5vw, 56px);
+      margin-bottom: 30px;
+      line-height: 1.2;
+    }
+    .section-desc {
+      font-size: 18px;
+      color: var(--neutral);
+      max-width: 600px;
+      font-weight: 300;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 25px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.4s ease;
+    }
+    header.scrolled {
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(20px);
+      padding: 15px 50px;
+      box-shadow: 0 2px 30px rgba(0,0,0,0.08);
+    }
+    header.scrolled .logo,
+    header.scrolled nav a { color: var(--primary); }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+    .logo span { color: var(--accent); }
+    nav { display: flex; gap: 40px; }
+    nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 1px;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+    nav a:hover::after { width: 100%; }
+    .menu-toggle { display: none; color: #fff; font-size: 24px; cursor: pointer; }
+
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+      transform: scale(1.1);
+      animation: heroZoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.1); }
+      to { transform: scale(1.2); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: #fff;
+      max-width: 900px;
+      padding: 0 30px;
+    }
+    .hero-subtitle {
+      font-size: 14px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeInUp 1s 0.3s forwards;
+    }
+    .hero-title {
+      font-size: clamp(48px, 8vw, 90px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeInUp 1s 0.5s forwards;
+    }
+    .hero-desc {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 50px;
+      opacity: 0;
+      animation: fadeInUp 1s 0.7s forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-btn {
+      display: inline-block;
+      padding: 18px 45px;
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeInUp 1s 0.9s forwards;
+      transition: all 0.4s;
+    }
+    .hero-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s forwards;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .scroll-indicator span {
+      writing-mode: vertical-rl;
+      letter-spacing: 3px;
+    }
+    .scroll-indicator i {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(8px); }
+      60% { transform: translateY(4px); }
+    }
+
+    .philosophy {
+      padding: 150px 0;
+      background: var(--bg);
+    }
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+    .philosophy-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .philosophy-img::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: 20px;
+      bottom: 20px;
+      border: 2px solid var(--accent);
+      z-index: -1;
+    }
+    .philosophy-img img {
+      width: 100%;
+      height: 600px;
+      object-fit: cover;
+    }
+    .philosophy-content .section-desc { margin-bottom: 40px; }
+    .philosophy-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 50px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .feature-item i {
+      color: var(--accent);
+      font-size: 20px;
+      margin-top: 3px;
+    }
+    .feature-item h4 {
+      font-size: 16px;
+      margin-bottom: 5px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+    .feature-item p {
+      font-size: 14px;
+      color: var(--neutral);
+    }
+
+    .services {
+      padding: 120px 0;
+      background: var(--secondary);
+    }
+    .services-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .services-header .section-desc { margin: 0 auto; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .service-card {
+      background: #fff;
+      padding: 60px 40px;
+      text-align: center;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    }
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      color: var(--accent);
+      font-size: 28px;
+      transition: all 0.4s;
+    }
+    .service-card:hover .service-icon {
+      background: var(--accent);
+      color: #fff;
+    }
+    .service-card h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .service-card p {
+      font-size: 15px;
+      color: var(--neutral);
+      font-weight: 300;
+    }
+
+    .projects { padding: 120px 0; }
+    .projects-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+    }
+    .projects-filter {
+      display: flex;
+      gap: 30px;
+    }
+    .filter-btn {
+      font-size: 14px;
+      color: var(--neutral);
+      padding-bottom: 5px;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .filter-btn.active,
+    .filter-btn:hover {
+      color: var(--primary);
+      border-color: var(--accent);
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 300px;
+      gap: 20px;
+    }
+    .project-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .project-item:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+    .project-item:nth-child(2) { grid-column: span 5; }
+    .project-item:nth-child(3) { grid-column: span 5; }
+    .project-item:nth-child(4) { grid-column: span 6; }
+    .project-item:nth-child(5) { grid-column: span 6; }
+    .project-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s;
+    }
+    .project-item:hover img { transform: scale(1.08); }
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .project-item:hover .project-overlay { opacity: 1; }
+    .project-overlay h3 {
+      color: #fff;
+      font-size: 24px;
+      margin-bottom: 8px;
+      transform: translateY(20px);
+      transition: transform 0.4s;
+    }
+    .project-overlay span {
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: translateY(20px);
+      transition: transform 0.4s 0.1s;
+    }
+    .project-item:hover .project-overlay h3,
+    .project-item:hover .project-overlay span { transform: translateY(0); }
+
+    .stats {
+      padding: 100px 0;
+      background: var(--dark-bg);
+      color: #fff;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 50px;
+      text-align: center;
+    }
+    .stat-item .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-item .label {
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 15px;
+      color: var(--text-muted);
+    }
+
+    .team { padding: 120px 0; }
+    .team-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .team-header .section-desc { margin: 0 auto; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+    .team-member {
+      text-align: center;
+      cursor: pointer;
+    }
+    .team-member-img {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 25px;
+    }
+    .team-member-img img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: all 0.5s;
+    }
+    .team-member:hover .team-member-img img {
+      filter: grayscale(0);
+      transform: scale(1.03);
+    }
+    .team-member-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(201,169,98,0.2);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .team-member:hover .team-member-img::after { opacity: 1; }
+    .team-member h4 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .team-member span {
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+
+    .testimonials {
+      padding: 120px 0;
+      background: var(--secondary);
+    }
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .testimonials-header .section-desc { margin: 0 auto; }
+    .testimonials-slider {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .testimonial-item {
+      text-align: center;
+      padding: 0 50px;
+      display: none;
+    }
+    .testimonial-item.active { display: block; }
+    .testimonial-quote {
+      font-size: 24px;
+      font-style: italic;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .testimonial-quote::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 120px;
+      color: var(--accent);
+      opacity: 0.2;
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    .testimonial-author img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .testimonial-author-info h5 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .testimonial-author-info p {
+      font-size: 13px;
+      color: var(--neutral);
+    }
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 50px;
+    }
+    .slider-dot {
+      width: 10px;
+      height: 10px;
+      border: 1px solid var(--neutral);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .slider-dot.active { background: var(--accent); border-color: var(--accent); }
+
+    .contact { padding: 120px 0; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .contact-info .section-desc { margin-bottom: 50px; }
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .contact-item i {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .contact-item h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .contact-item p {
+      font-size: 15px;
+      color: var(--neutral);
+    }
+    .contact-form {
+      background: var(--secondary);
+      padding: 60px;
+    }
+    .form-group {
+      margin-bottom: 25px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid #ddd;
+      background: #fff;
+      font-family: inherit;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+    .submit-btn:hover { background: var(--accent); }
+
+    footer {
+      background: var(--dark-bg);
+      color: #fff;
+      padding: 80px 0 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 60px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand .logo { color: #fff; margin-bottom: 25px; }
+    .footer-brand p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+    .footer-social { display: flex; gap: 15px; }
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      transition: 0.3s;
+    }
+    .footer-social a:hover { background: var(--accent); border-color: var(--accent); }
+    .footer-col h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: 0.3s;
+    }
+    .footer-col a:hover { color: var(--accent); padding-left: 5px; }
+    .footer-newsletter p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: #fff;
+      font-size: 14px;
+    }
+    .newsletter-form input::placeholder { color: var(--text-muted); }
+    .newsletter-form button {
+      padding: 14px 25px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .newsletter-form button:hover { background: var(--accent-dark); }
+    .footer-bottom {
+      padding: 25px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--dark-bg);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s;
+    }
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .mobile-menu a {
+      font-size: 28px;
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+    }
+    .mobile-menu-close {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      color: #fff;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1200px) {
+      .container { padding: 0 40px; }
+      .philosophy-grid { gap: 60px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 20px 30px; }
+      header.scrolled { padding: 15px 30px; }
+      nav { display: none; }
+      .menu-toggle { display: block; color: #fff; }
+      header.scrolled .menu-toggle { color: var(--primary); }
+      .container { padding: 0 25px; }
+      .hero-title { font-size: 42px; }
+      .philosophy { padding: 100px 0; }
+      .philosophy-grid { grid-template-columns: 1fr; gap: 50px; }
+      .philosophy-img img { height: 400px; }
+      .philosophy-features { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .projects-header { flex-direction: column; align-items: flex-start; gap: 30px; }
+      .projects-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 250px;
+      }
+      .project-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .stat-item .number { font-size: 48px; }
+      .team-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 60px; }
+      .contact-form { padding: 40px 30px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <a href="#" class="logo">雪<span>.</span>Design</a>
+    <nav>
+      <a href="#philosophy">理念</a>
+      <a href="#services">服务</a>
+      <a href="#projects">案例</a>
+      <a href="#team">团队</a>
+      <a href="#contact">联系</a>
+    </nav>
+    <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+  </header>
+
+  <div class="mobile-menu">
+    <div class="mobile-menu-close"><i class="fas fa-times"></i></div>
+    <a href="#philosophy">理念</a>
+    <a href="#services">服务</a>
+    <a href="#projects">案例</a>
+    <a href="#team">团队</a>
+    <a href="#contact">联系</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-subtitle">高端室内设计事务所</p>
+      <h1 class="hero-title">让空间讲述<br>独一无二的故事</h1>
+      <p class="hero-desc">我们相信好的设计能够改变生活方式，以国际视野与东方美学融合，为您打造极致的生活空间体验</p>
+      <a href="#contact" class="hero-btn">预约咨询</a>
+    </div>
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <section class="philosophy" id="philosophy">
+    <div class="container">
+      <div class="philosophy-grid">
+        <div class="philosophy-img fade-up">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=80" alt="设计理念">
+        </div>
+        <div class="philosophy-content">
+          <p class="section-label fade-up">Design Philosophy</p>
+          <h2 class="section-title fade-up stagger-1">以人文本<br>以美为魂</h2>
+          <p class="section-desc fade-up stagger-2">海南布鲁盟装饰空间设计有限公司 成立于2018年，汇聚了来自世界各地的优秀设计师。我们专注于高端住宅、商业空间和办公环境的设计与顾问服务，致力于为每一位客户创造独特且永恒的空间体验。</p>
+          <div class="philosophy-features fade-up stagger-3">
+            <div class="feature-item">
+              <i class="fas fa-gem"></i>
+              <div>
+                <h4>精工细作</h4>
+                <p>每一个细节都经过精心推敲，确保品质与美学的完美统一</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-leaf"></i>
+              <div>
+                <h4>绿色可持续</h4>
+                <p>采用环保材料，践行可持续发展理念</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-globe"></i>
+              <div>
+                <h4>国际视野</h4>
+                <p>融合东方美学与国际设计趋势</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-handshake"></i>
+              <div>
+                <h4>专属服务</h4>
+                <p>一对一全程服务，确保每个项目独一无二</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services-header">
+        <p class="section-label fade-up">What We Do</p>
+        <h2 class="section-title fade-up stagger-1">我们的服务</h2>
+        <p class="section-desc fade-up stagger-2">涵盖从前期规划到后期执行的全流程服务，为您呈现完美的空间解决方案</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-up stagger-1">
+          <div class="service-icon"><i class="fas fa-home"></i></div>
+          <h3>高端住宅</h3>
+          <p>别墅、私宅、公寓等住宅空间的全案设计，打造个性化居住体验</p>
+        </div>
+        <div class="service-card fade-up stagger-2">
+          <div class="service-icon"><i class="fas fa-store"></i></div>
+          <h3>商业空间</h3>
+          <p>酒店、餐厅、零售店铺等商业空间设计，提升品牌价值</p>
+        </div>
+        <div class="service-card fade-up stagger-3">
+          <div class="service-icon"><i class="fas fa-building"></i></div>
+          <h3>办公环境</h3>
+          <p>办公室、共享空间等办公环境设计，打造高效舒适的工作空间</p>
+        </div>
+        <div class="service-card fade-up stagger-1">
+          <div class="service-icon"><i class="fas fa-couch"></i></div>
+          <h3>软装设计</h3>
+          <p>家具选配、窗帘地毯、装饰画等软装整体搭配</p>
+        </div>
+        <div class="service-card fade-up stagger-2">
+          <div class="service-icon"><i class="fas fa-drafting-compass"></i></div>
+          <h3>设计方案</h3>
+          <p>专业的空间规划、3D效果图、施工图绘制</p>
+        </div>
+        <div class="service-card fade-up stagger-3">
+          <div class="service-icon"><i class="fas fa-project-diagram"></i></div>
+          <h3>项目顾问</h3>
+          <p>设计咨询、材料采购、施工监理全程顾问服务</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="projects-header">
+        <div>
+          <p class="section-label fade-up">Our Works</p>
+          <h2 class="section-title fade-up stagger-1">精选案例</h2>
+        </div>
+        <div class="projects-filter fade-up stagger-2">
+          <span class="filter-btn active" data-filter="all">全部</span>
+          <span class="filter-btn" data-filter="residential">住宅</span>
+          <span class="filter-btn" data-filter="commercial">商业</span>
+          <span class="filter-btn" data-filter="office">办公</span>
+        </div>
+      </div>
+      <div class="projects-grid">
+        <div class="project-item fade-up" data-category="residential">
+          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" alt="项目1">
+          <div class="project-overlay">
+            <h3>翡翠湾别墅</h3>
+            <span>高端住宅</span>
+          </div>
+        </div>
+        <div class="project-item fade-up stagger-1" data-category="commercial">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="项目2">
+          <div class="project-overlay">
+            <h3>外滩壹号</h3>
+            <span>商业空间</span>
+          </div>
+        </div>
+        <div class="project-item fade-up stagger-2" data-category="office">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="项目3">
+          <div class="project-overlay">
+            <h3>金融中心办公室</h3>
+            <span>办公空间</span>
+          </div>
+        </div>
+        <div class="project-item fade-up stagger-3" data-category="residential">
+          <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=800&q=80" alt="项目4">
+          <div class="project-overlay">
+            <h3>云端公寓</h3>
+            <span>高端住宅</span>
+          </div>
+        </div>
+        <div class="project-item fade-up stagger-4" data-category="commercial">
+          <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=80" alt="项目5">
+          <div class="project-overlay">
+            <h3>Artisan咖啡厅</h3>
+            <span>商业空间</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item fade-up">
+          <div class="number" data-target="280">0</div>
+          <div class="label">完成项目</div>
+        </div>
+        <div class="stat-item fade-up stagger-1">
+          <div class="number" data-target="9">0</div>
+          <div class="label">年行业经验</div>
+        </div>
+        <div class="stat-item fade-up stagger-2">
+          <div class="number" data-target="35">0</div>
+          <div class="label">设计团队</div>
+        </div>
+        <div class="stat-item fade-up stagger-3">
+          <div class="number" data-target="98">0</div>
+          <div class="label">客户满意度 %</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team" id="team">
+    <div class="container">
+      <div class="team-header">
+        <p class="section-label fade-up">Our Team</p>
+        <h2 class="section-title fade-up stagger-1">核心团队</h2>
+        <p class="section-desc fade-up stagger-2">汇聚国内外顶尖设计人才，用专业创造价值</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-member fade-up stagger-1">
+          <div class="team-member-img">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="张明远">
+          </div>
+          <h4>张明远</h4>
+          <span>创始人 / 设计总监</span>
+        </div>
+        <div class="team-member fade-up stagger-2">
+          <div class="team-member-img">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80" alt="李诗韵">
+          </div>
+          <h4>李诗韵</h4>
+          <span>设计总监</span>
+        </div>
+        <div class="team-member fade-up stagger-3">
+          <div class="team-member-img">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80" alt="陈逸风">
+          </div>
+          <h4>陈逸风</h4>
+          <span>高级设计师</span>
+        </div>
+        <div class="team-member fade-up stagger-4">
+          <div class="team-member-img">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=600&q=80" alt="王雅琳">
+          </div>
+          <h4>王雅琳</h4>
+          <span>软装总监</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <p class="section-label fade-up">Testimonials</p>
+        <h2 class="section-title fade-up stagger-1">客户评价</h2>
+        <p class="section-desc fade-up stagger-2">来自客户的真实反馈与认可</p>
+      </div>
+      <div class="testimonials-slider fade-up stagger-2">
+        <div class="testimonial-item active">
+          <p class="testimonial-quote">雪 Design 团队非常专业，从最初的概念到最终落地，每一个环节都精益求精。我们的新办公室成为了公司形象的完美载体，员工满意度大幅提升。</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="客户">
+            <div class="testimonial-author-info">
+              <h5>陈志明</h5>
+              <p>某知名科技公司 CEO</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-item">
+          <p class="testimonial-quote">设计团队完全理解了我们对家的想象，甚至超越了我们的预期。每一个细节都体现出极致的用心，住进来的每一天都是享受。</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="客户">
+            <div class="testimonial-author-info">
+              <h5>林晓婷</h5>
+              <p>别墅业主</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-item">
+          <p class="testimonial-quote">餐厅的设计让我们成为了网红打卡地，营业额提升了40%。感谢雪 Design 团队的创意与专业，让我们的品牌焕发新的活力。</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" alt="客户">
+            <div class="testimonial-author-info">
+              <h5>张伟</h5>
+              <p>某连锁餐厅创始人</p>
+            </div>
+          </div>
+        </div>
+        <div class="slider-dots">
+          <span class="slider-dot active" data-slide="0"></span>
+          <span class="slider-dot" data-slide="1"></span>
+          <span class="slider-dot" data-slide="2"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="section-label fade-up">Contact Us</p>
+          <h2 class="section-title fade-up stagger-1">开始您的设计之旅</h2>
+          <p class="section-desc fade-up stagger-2">无论您是想打造梦想中的家，还是提升商业空间的价值，我们都在这里为您提供专业的咨询服务。</p>
+          <div class="contact-details">
+            <div class="contact-item fade-up stagger-3">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <h4>地址</h4>
+                <p>上海市静安区南京西路1788号<br>国际中心大厦58层</p>
+              </div>
+            </div>
+            <div class="contact-item fade-up stagger-3">
+              <i class="fas fa-phone"></i>
+              <div>
+                <h4>电话</h4>
+                <p>+86 21 5888 6688</p>
+              </div>
+            </div>
+            <div class="contact-item fade-up stagger-3">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <h4>邮箱</h4>
+                <p>hello@shangdesign.com</p>
+              </div>
+            </div>
+            <div class="contact-item fade-up stagger-3">
+              <i class="fas fa-clock"></i>
+              <div>
+                <h4>营业时间</h4>
+                <p>周一至周六 9:00 - 18:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form fade-up stagger-2">
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>您的姓名</label>
+                <input type="text" name="name" placeholder="请输入姓名" required>
+              </div>
+              <div class="form-group">
+                <label>联系电话</label>
+                <input type="tel" name="phone" placeholder="请输入电话" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>邮箱地址</label>
+              <input type="email" name="email" placeholder="请输入邮箱" required>
+            </div>
+            <div class="form-group">
+              <label>项目类型</label>
+              <select name="type" required>
+                <option value="">请选择项目类型</option>
+                <option value="residential">高端住宅</option>
+                <option value="commercial">商业空间</option>
+                <option value="office">办公环境</option>
+                <option value="other">其他咨询</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>项目描述</label>
+              <textarea name="message" placeholder="请简单描述您的项目需求..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">提交咨询</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">雪<span>.</span>Design</a>
+          <p>雪 Design 是一家专注高端室内设计的事务所，致力于为客户创造独特且永恒的空间体验。</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-weixin"></i></a>
+            <a href="#"><i class="fab fa-weibo"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="#philosophy">关于我们</a></li>
+            <li><a href="#services">服务项目</a></li>
+            <li><a href="#projects">精选案例</a></li>
+            <li><a href="#team">设计团队</a></li>
+            <li><a href="#contact">联系咨询</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>服务项目</h4>
+          <ul>
+            <li><a href="#">高端住宅设计</a></li>
+            <li><a href="#">商业空间设计</a></li>
+            <li><a href="#">办公环境设计</a></li>
+            <li><a href="#">软装设计</a></li>
+            <li><a href="#">设计顾问</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-newsletter">
+          <h4>关注我们</h4>
+          <p>订阅我们的资讯，获取最新设计案例和行业动态。</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="输入邮箱地址">
+            <button><i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 雪 Design. 保留所有权利. | 琼ICP备12345678号</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const header = document.getElementById('header');
+      const menuToggle = document.querySelector('.menu-toggle');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      const mobileMenuClose = document.querySelector('.mobile-menu-close');
+      const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+      const fadeElements = document.querySelectorAll('.fade-up');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const projectItems = document.querySelectorAll('.project-item');
+      const sliderDots = document.querySelectorAll('.slider-dot');
+      const testimonialItems = document.querySelectorAll('.testimonial-item');
+      const contactForm = document.getElementById('contactForm');
+
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      menuToggle.addEventListener('click', function() {
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+      mobileMenuClose.addEventListener('click', function() {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+      mobileMenuLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+      fadeElements.forEach(function(el) {
+        observer.observe(el);
+      });
+
+      filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          const filter = btn.dataset.filter;
+          projectItems.forEach(function(item) {
+            if (filter === 'all' || item.dataset.category === filter) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      let currentSlide = 0;
+      function showSlide(index) {
+        testimonialItems.forEach(function(item) { item.classList.remove('active'); });
+        sliderDots.forEach(function(dot) { dot.classList.remove('active'); });
+        testimonialItems[index].classList.add('active');
+        sliderDots[index].classList.add('active');
+      }
+      sliderDots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+          currentSlide = parseInt(dot.dataset.slide);
+          showSlide(currentSlide);
+        });
+      });
+      setInterval(function() {
+        currentSlide = (currentSlide + 1) % testimonialItems.length;
+        showSlide(currentSlide);
+      }, 5000);
+
+      const statNumbers = document.querySelectorAll('.stat-item .number');
+      let statsAnimated = false;
+      function animateStats() {
+        if (statsAnimated) return;
+        statNumbers.forEach(function(num) {
+          const target = parseInt(num.dataset.target);
+          const duration = 2000;
+          const step = target / (duration / 16);
+          let current = 0;
+          const timer = setInterval(function() {
+            current += step;
+            if (current >= target) {
+              num.textContent = target;
+              clearInterval(timer);
+            } else {
+              num.textContent = Math.floor(current);
+            }
+          }, 16);
+        });
+        statsAnimated = true;
+      }
+      const statsSection = document.querySelector('.stats');
+      const statsObserver = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          animateStats();
+        }
+      }, { threshold: 0.3 });
+      statsObserver.observe(statsSection);
+
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = contactForm.querySelector('.submit-btn');
+        const originalText = btn.textContent;
+        btn.textContent = '提交中...';
+        btn.disabled = true;
+        setTimeout(function() {
+          btn.textContent = '提交成功';
+          btn.style.background = '#27ae60';
+          setTimeout(function() {
+            contactForm.reset();
+            btn.textContent = originalText;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 2000);
+        }, 1500);
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
