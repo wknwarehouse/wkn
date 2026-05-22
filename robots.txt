@@ -1,1 +1,3 @@
-
+User-agent: *
+Allow: /
+Sitemap: https://wknwarehouse.github.io/wkn/sitemap.xml
