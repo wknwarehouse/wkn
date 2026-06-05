@@ -2,6 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+<meta name="keywords" content="海南布鲁盟装饰空间设计有限公司，雪 Design">
+<meta name="description" content="专注高端住宅、商业空间、办公环境设计，以国际视野诠释空间美学">
+<meta name="robots" content="index,follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>海南布鲁盟装饰空间设计有限公司</title>
   <meta name="description" content="雪 Design - 专注高端住宅、商业空间、办公环境设计，以国际视野诠释空间美学">
@@ -1002,8 +1005,8 @@
           <div class="label">设计团队</div>
         </div>
         <div class="stat-item fade-up stagger-3">
-          <div class="number" data-target="98">0</div>
-          <div class="label">客户满意度 %</div>
+          <div class="number" data-target="98%">0</div>
+          <div class="label">客户满意度</div>
         </div>
       </div>
     </div>
@@ -1108,21 +1111,21 @@
               <i class="fas fa-map-marker-alt"></i>
               <div>
                 <h4>地址</h4>
-                <p>海南省三亚市<br>大悦城</p>
+                <p>海南省三亚市吉阳区吉阳迎宾大道荣耀世纪大厦</p>
               </div>
             </div>
             <div class="contact-item fade-up stagger-3">
               <i class="fas fa-phone"></i>
               <div>
                 <h4>电话</h4>
-                <p>+86 0000000000</p>
+                <p>+86 18889192247</p>
               </div>
             </div>
             <div class="contact-item fade-up stagger-3">
               <i class="fas fa-envelope"></i>
               <div>
                 <h4>邮箱</h4>
-                <p>hello@xuedesign.com</p>
+                <p>1070736415@qq.com</p>
               </div>
             </div>
             <div class="contact-item fade-up stagger-3">
@@ -1139,20 +1142,17 @@
             <div class="form-row">
               <div class="form-group">
                 <label>您的姓名</label>
-                <input type="text" name="name" placeholder="请输入姓名" required>
+                <input type="text" id="name" placeholder="请输入姓名" required>
               </div>
               <div class="form-group">
                 <label>联系电话</label>
-                <input type="tel" name="phone" placeholder="请输入电话" required>
+                <input type="tel" id="phone" placeholder="请输入电话" required>
               </div>
             </div>
-            <div class="form-group">
-              <label>邮箱地址</label>
-              <input type="email" name="email" placeholder="请输入邮箱" required>
-            </div>
+            
             <div class="form-group">
               <label>项目类型</label>
-              <select name="type" required>
+              <select id="projectType" required>
                 <option value="">请选择项目类型</option>
                 <option value="residential">高端住宅</option>
                 <option value="commercial">商业空间</option>
@@ -1162,7 +1162,7 @@
             </div>
             <div class="form-group">
               <label>项目描述</label>
-              <textarea name="message" placeholder="请简单描述您的项目需求..." required></textarea>
+              <textarea id="message" placeholder="请简单描述您的项目需求..." required></textarea>
             </div>
             <button type="submit" class="submit-btn">提交咨询</button>
           </form>
@@ -1178,10 +1178,9 @@
           <a href="#" class="logo">雪<span>.</span>Design</a>
           <p>雪 Design 是一家专注高端室内设计的事务所，致力于为客户创造独特且永恒的空间体验。</p>
           <div class="footer-social">
-            <a href="#"><i class="fab fa-weixin"></i></a>
-            <a href="#"><i class="fab fa-weibo"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="javascript:void(0)" class="social-link" data-platform="weixin" title="微信公众号"><i class="fab fa-weixin"></i></a>
+            <a href="javascript:void(0)" class="social-link" data-platform="weibo" title="官方微博"><i class="fab fa-weibo"></i></a>
+            <a href="javascript:void(0)" class="social-link" data-platform="tiktok" title="抖音账号"><i class="fab fa-tiktok"></i></a>
           </div>
         </div>
         <div class="footer-col">
@@ -1207,13 +1206,11 @@
         <div class="footer-col footer-newsletter">
           <h4>关注我们</h4>
           <p>订阅我们的资讯，获取最新设计案例和行业动态。</p>
-          <div class="newsletter-form">
-            
-          </div>
+          
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 雪 Design. 保留所有权利. | 琼ICP备12345678号</p>
+        <p>&copy; 2024 雪 Design. 保留所有权利. | 琼ICP备12345678号</p>
       </div>
     </div>
   </footer>
@@ -1334,20 +1331,74 @@
 
       contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        const formData = {
+          name: document.getElementById('name').value,
+          phone: document.getElementById('phone').value,
+          project_type: document.getElementById('projectType').value,
+          message: document.getElementById('message').value
+        };
+        
         const btn = contactForm.querySelector('.submit-btn');
         const originalText = btn.textContent;
+        
         btn.textContent = '提交中...';
         btn.disabled = true;
-        setTimeout(function() {
-          btn.textContent = '提交成功';
-          btn.style.background = '#27ae60';
+        
+        fetch('http://localhost:3000/api/contacts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            btn.textContent = '提交成功';
+            btn.style.background = '#27ae60';
+          } else {
+            btn.textContent = '提交失败';
+            btn.style.background = '#e74c3c';
+          }
+          
           setTimeout(function() {
             contactForm.reset();
             btn.textContent = originalText;
             btn.style.background = '';
             btn.disabled = false;
           }, 2000);
-        }, 1500);
+        })
+        .catch(error => {
+          console.error('提交失败:', error);
+          btn.textContent = '网络错误';
+          btn.style.background = '#e74c3c';
+          
+          setTimeout(function() {
+            btn.textContent = originalText;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 2000);
+        });
+      });
+
+      const socialLinks = document.querySelectorAll('.social-link');
+      socialLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const platform = this.dataset.platform;
+          const platformNames = {
+            weixin: '微信公众号',
+            weibo: '官方微博',
+            tiktok: '抖音账号'
+          };
+          const urls = {
+            weixin: 'https://weixin.qq.com/',
+            weibo: 'https://weibo.com/',
+            tiktok: 'https://v.douyin.com/trZUgMVash0/'
+          };
+          window.open(urls[platform], '_blank');
+        });
       });
 
       document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
